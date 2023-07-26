@@ -32,7 +32,7 @@ class SgvpUserProvider implements UserProvider
 
     public function retrieveByCredentials(array $credentials)
     {
-        $response = Http::post('https://sgvp-backend-api.herokuapp.com/api/usuarios/autenticar', $credentials);
+        $response = Http::post('http://154.56.43.108:8080/api/usuarios/autenticar', $credentials);
 
         if (!$response->ok()) {
             return null;
@@ -45,7 +45,7 @@ class SgvpUserProvider implements UserProvider
 
     public function validateCredentials(Authenticatable $user, array $credentials)
     {
-        $response = Http::post('https://sgvp-backend-api.herokuapp.com/api/usuarios/autenticar', $credentials);
+        $response = Http::post('http://154.56.43.108:8080/api/usuarios/autenticar', $credentials);
 
         return $response->ok();
     }

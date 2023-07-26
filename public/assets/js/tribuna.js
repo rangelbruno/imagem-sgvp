@@ -66,7 +66,7 @@ function iniciarVereador(nrSequence, token, nrSeqSessao, nome) {
 
     console.log(data);
 
-    const url = "https://sgvp-backend-api.herokuapp.com/api/tempoTribuna";
+    const url = "http://154.56.43.108:8080/api/tempoTribuna";
 
     const options = {
         method: "POST",
@@ -181,7 +181,7 @@ function aparteVereador(nrSequence, nome, token, nrSeqSessao) {
 
     console.log(data);
 
-    const url = "https://sgvp-backend-api.herokuapp.com/api/tempoTribuna";
+    const url = "http://154.56.43.108:8080/api/tempoTribuna";
 
     const options = {
         method: "POST",

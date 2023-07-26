@@ -80,7 +80,7 @@ class UserController extends Controller
 
     public function cadastrar(Request $request)
     {        
-        $response = Http::post('https://sgvp-backend-api.herokuapp.com/api/usuarios', $request->json());
+        $response = Http::post('http://154.56.43.108:8080/api/usuarios', $request->json());
 
         return response()->json([
             'success' => true,
@@ -128,7 +128,7 @@ class UserController extends Controller
         try {
             $response = Http::withToken($token)
                 ->withHeaders(['Accept' => 'application/json'])
-                ->post('https://sgvp-backend-api.herokuapp.com/api/usuarios', $dados_formulario);
+                ->post('http://154.56.43.108:8080/api/usuarios', $dados_formulario);
              
             if ($response->successful()) {
                 // Redirecione para a lista de usuários com uma mensagem de sucesso
@@ -236,7 +236,7 @@ class UserController extends Controller
         try {
             $response = Http::withToken($token)
                 ->withHeaders(['Accept' => 'application/json'])
-                ->put('https://sgvp-backend-api.herokuapp.com/api/usuarios/' . $nrSequence, $dados_formulario);
+                ->put('http://154.56.43.108:8080/api/usuarios/' . $nrSequence, $dados_formulario);
 
             if ($response->successful()) {
                 return redirect('/usuarios/'. $nrSequence .'/editar')->with('mensagem', 'Usuário atualizado com sucesso!');

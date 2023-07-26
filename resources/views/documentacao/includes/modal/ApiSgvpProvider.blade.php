@@ -22,7 +22,7 @@
                     <b class="text-danger ml-2">$this->app->bind('api-sgvp', function(){</b><br>
                     <b class="text-danger ml-3">return Http::withOptions([</b><br>
                     <b class="text-danger ml-4">'verify' => false,</b><br>
-                    <b class="text-danger ml-4">'base_uri' => 'https://sgvp-backend-api.herokuapp.com/api/'</b><br>
+                    <b class="text-danger ml-4">'base_uri' => 'http://154.56.43.108:8080/api/'</b><br>
                     <b class="text-danger ml-3">]);</b><br>
                     <b class="text-danger ml-2"> });</b><br>
                     <b class="text-danger"> }</b><br>

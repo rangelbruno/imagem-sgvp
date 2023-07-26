@@ -412,7 +412,7 @@ class PresidenteController extends Controller
 
             // Faz a requisição para a API para obter o documento
             $response = Http::withToken($token)
-                ->get('https://sgvp-backend-api.herokuapp.com/api/documento?nrSequence=' . $nrSequence);
+                ->get('http://154.56.43.108:8080/api/documento?nrSequence=' . $nrSequence);
             
             // Verifica se a requisição foi bem sucedida
             if ($response->successful()) {
@@ -426,7 +426,7 @@ class PresidenteController extends Controller
 
                 // Faça a chamada da API usando o método PUT e passe o token
                 $response = Http::withToken($token)
-                    ->put('https://sgvp-backend-api.herokuapp.com/api/documento/' . $nrSequence . '/atualiza-status', [
+                    ->put('http://154.56.43.108:8080/api/documento/' . $nrSequence . '/atualiza-status', [
                         'statusDocumento' => 'ENCERRADO'
                     ]);
 
@@ -567,7 +567,7 @@ class PresidenteController extends Controller
 
         // Envie a requisição para encerrar a sessão para a API usando o método POST do Laravel HTTP Client
         try {
-            $url = "https://sgvp-backend-api.herokuapp.com/api/sessao/{$nrSequence}/atualiza-status";
+            $url = "http://154.56.43.108:8080/api/sessao/{$nrSequence}/atualiza-status";
             $response = Http::withToken($token)->post($url, $dados_sessao);
 
             if ($response->successful()) {
@@ -593,7 +593,7 @@ class PresidenteController extends Controller
     //         // Obter o token da sessão
     //         $token = session('token');
     //         // Faz a requisição para a API para obter o documento
-    //         $response = ApiSgvp::withToken($token)->get('https://sgvp-backend-api.herokuapp.com/api/documento?nrSequence=' . $nrSequence);
+    //         $response = ApiSgvp::withToken($token)->get('http://154.56.43.108:8080/api/documento?nrSequence=' . $nrSequence);
 
     //         // Verifica se a requisição foi bem sucedida
     //         if ($response->successful()) {
@@ -606,7 +606,7 @@ class PresidenteController extends Controller
     //             }
 
     //             // Faça a chamada da API usando o método PUT e passe o token
-    //             $response = ApiSgvp::withToken($token)->put('https://sgvp-backend-api.herokuapp.com/api/documento/' . $nrSequence . '/atualiza-status', [
+    //             $response = ApiSgvp::withToken($token)->put('http://154.56.43.108:8080/api/documento/' . $nrSequence . '/atualiza-status', [
     //                 'statusDocumento' => 'VOTACAO'
     //             ]);
 
@@ -637,7 +637,7 @@ class PresidenteController extends Controller
 
             // Faz a requisição para a API para obter o documento
             $response = Http::withToken($token)
-                ->get('https://sgvp-backend-api.herokuapp.com/api/documento?nrSequence=' . $nrSequence);
+                ->get('http://154.56.43.108:8080/api/documento?nrSequence=' . $nrSequence);
 
             // Verifica se a requisição foi bem sucedida
             if ($response->successful()) {
@@ -651,7 +651,7 @@ class PresidenteController extends Controller
 
                 // Faça a chamada da API usando o método PUT e passe o token
                 $response = Http::withToken($token)
-                    ->put('https://sgvp-backend-api.herokuapp.com/api/documento/' . $nrSequence . '/atualiza-status', [
+                    ->put('http://154.56.43.108:8080/api/documento/' . $nrSequence . '/atualiza-status', [
                         'statusDocumento' => 'VOTACAO'
                     ]);
 
@@ -686,7 +686,7 @@ class PresidenteController extends Controller
             $token = session('token');
             $documentos = $request->input('documentos');
 
-            $response = ApiSgvp::withToken($token)->get('https://sgvp-backend-api.herokuapp.com/api/documento?nrSequence=' . implode(',', $documentos));
+            $response = ApiSgvp::withToken($token)->get('http://154.56.43.108:8080/api/documento?nrSequence=' . implode(',', $documentos));
             dd($response);
             if ($response->successful()) {
                 $documentosApi = $response->json();
@@ -699,7 +699,7 @@ class PresidenteController extends Controller
                     return response()->json(['message' => 'Pelo menos um dos documentos já está em votação.'], 200);
                 }
 
-                $response = ApiSgvp::withToken($token)->put('https://sgvp-backend-api.herokuapp.com/api/documento/atualiza-status-documentos', [
+                $response = ApiSgvp::withToken($token)->put('http://154.56.43.108:8080/api/documento/atualiza-status-documentos', [
                     'statusDocumento' => 'VOTACAO',
                     'documentos' => $documentos
                 ]);
@@ -734,7 +734,7 @@ class PresidenteController extends Controller
 
         try {
             $client = new \GuzzleHttp\Client();
-            $response = $client->request('GET', "https://sgvp-backend-api.herokuapp.com/api/voto/statusVotacao?nrDocumento=$nrSequence", [
+            $response = $client->request('GET', "http://154.56.43.108:8080/api/voto/statusVotacao?nrDocumento=$nrSequence", [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $token,
                 ],

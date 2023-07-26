@@ -14,7 +14,7 @@ class VoteController extends Controller
         $voto = $request->input('voto');
 
         // Envie a votação para a API usando o método POST do Laravel HTTP Client
-        $response = Http::post('https://sgvp-backend-api.herokuapp.com/api/voto', [
+        $response = Http::post('http://154.56.43.108:8080/api/voto', [
             'nrSequenceUsuario' => $nrSequenceUsuario,
             'nrSequenceDocumento' => $nrSequenceDocumento,
             'voto' => $voto,

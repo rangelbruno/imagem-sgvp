@@ -87,12 +87,18 @@ class ApiController extends Controller
         if (empty($cpf) || empty($senha)) {
             return redirect()->route('login')->withErrors('CPF e senha são obrigatórios.');
         }
-
+     
         try {
+            
+
             $response = ApiSgvp::post('/usuarios/autenticar', [
                 'cpf' => $cpf,
                 'senha' => $senha,
             ]);
+
+          
+
+            
 
             if ($response->successful()) {
                 $token = $response->json()['token'];

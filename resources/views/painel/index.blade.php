@@ -40,7 +40,7 @@
                 <div class="col d-flex justify-content-between  mt-3">
                     @if (empty($sessoes))
                         <div class=" px-5">
-                            <h1 class="text-uppercase" style="color: white;">Nenhuma Sessãos </h1>
+                            <h1 class="text-uppercase" style="color: white;">Nenhuma Sessão </h1>
                         </div>
                     @else
                         @foreach ($sessoes as $sessao)

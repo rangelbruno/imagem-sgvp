@@ -1,0 +1,139 @@
+#container-total {
+    background-color: #1abc9c;
+}
+
+.container-presente {
+    background-color: #1abc9c;
+    /* display: flex; */
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 10px;
+}
+
+.container-ausente {
+    background-color: #e7515a;
+    /* display: flex; */
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+    border-radius: 10px;
+}
+
+.container-ausente .container-text-painel {
+    color: white;
+}
+
+#clock-container-painel {
+    border: 2px solid #33333300;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f027;
+    width: max-content;
+    margin: auto;
+}
+
+#vereador-online {
+    margin: 1px 4px 0 0;
+    padding: 3px;
+    /* Aqui Você pode aumentar ou diminuir o tamanho da borda pode colocar 3px, 5px, 6px etc */
+    border: 1px solid #0af098;
+    text-shadow: -1px 0 rgb(22, 247, 138), 0 1px black, 1px 0 black,
+        0 -1px black;
+    background-size: cover;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+#vereador-voto-nao {
+    margin: 1px 4px 0 0;
+    padding: 3px;
+    /* Aqui Você pode aumentar ou diminuir o tamanho da borda pode colocar 3px, 5px, 6px etc */
+    border: 1px solid #e7515a;
+    text-shadow: -1px 0 rgb(22, 247, 138), 0 1px black, 1px 0 black,
+        0 -1px black;
+    background-size: cover;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+#vereador-voto-absteve {
+    margin: 1px 4px 0 0;
+    padding: 3px;
+    /* Aqui Você pode aumentar ou diminuir o tamanho da borda pode colocar 3px, 5px, 6px etc */
+    border: 1px solid #ffc107;
+    text-shadow: -1px 0 rgb(22, 247, 138), 0 1px black, 1px 0 black,
+        0 -1px black;
+    background-size: cover;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+#vereador-offline {
+    margin: 1px 4px 0 0;
+    padding: 3px;
+    /* Aqui Você pode aumentar ou diminuir o tamanho da borda pode colocar 3px, 5px, 6px etc */
+    background-color: #ff0505;
+    border-radius: 10px;
+    /* Aqui você pode trocar a cor */
+    object-fit: cover;
+}
+
+#card-vereadores {
+    display: flex;
+    align-items: center;
+}
+
+#card-vereadores-offline {
+    display: flex;
+    align-items: center;
+    filter: grayscale(100%);
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+#card-vereadores-voto-nao {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+#card-vereadores-voto-absteve {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+#btn-custom {
+    color: #ffffff;
+    border: #ffffff solid 1px;
+}
+
+#btn-custom :hover {
+    color: black;
+}
+
+.card-vereador-em-fala {
+    background-color: #667871;
+    width: 300px;
+    height: 300px;
+}
+
+.card-vereador-a-parte {
+    background-color: #667871;
+    width: 200px;
+    height: 200px;
+}
+
+.container-vereadores {
+    margin: 100px;
+}

@@ -57,7 +57,7 @@ services:
 
     # queue
     queue:
-        image: brunojprangel/sgvp:mongagua
+        image: brunojprangel/sgvp:v2
         restart: unless-stopped
         command: "php artisan queue:work"
         volumes:

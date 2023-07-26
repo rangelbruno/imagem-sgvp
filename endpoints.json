@@ -1,0 +1,27 @@
+{
+    "httpStatus": "400 BAD_REQUEST",
+    "message": "Você já realizou um voto para este documento"
+}
+-----------------------------------------------------
+/api/documento/210/atualiza-status
+{
+    "statusDocumento": "VOTACAO"
+}
+{
+    "statusDocumento": "ENCERRADO"
+}
+-----------------------------------------------------
+/api/voto/votoBloco
+{
+  "usuarioVoto": {
+      "nrSequence": 88
+  } ,
+  "voto": "SIM",
+      "documentos": [
+      196, 197
+    ]
+}
+-----------------------------------------------------
+https://sgvp-backend-api.herokuapp.com/api/voto/relatorioResultadoVotacao?nrSeqSessao=46
+https://sgvp-backend-api.herokuapp.com/api/voto/relatorioResultadoVotacao?nrSeqSessao=54
+-----------------------------------------------------

@@ -1,0 +1,54 @@
+@font-face {
+    font-family: "Digital-7";
+    src: url("../fonts/digital-7.woff") format("woff");
+}
+
+#clock-container {
+    border: 2px solid #33333300;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f027;
+    width: max-content;
+    margin: auto;
+}
+
+.clock-container-painel {
+    border: 2px solid #33333300;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f027;
+
+    margin: auto;
+}
+
+#title,
+#countdown-title {
+    font-family: "Arial", sans-serif;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+#clock,
+#countdown {
+    font-family: "Digital-7", monospace;
+    font-size: 2vw;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+}
+
+#timer {
+    font-family: "Digital-7", monospace;
+    font-size: 2vw;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+}

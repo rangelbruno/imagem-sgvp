@@ -92,7 +92,7 @@ class SessaoController extends Controller
         try {
             $response = Http::withToken($token) 
                 ->withHeaders(['Accept' => 'application/json'])
-                ->post('http://154.56.43.108:8080/api/sessao', $dados_formulario);
+                ->post('https://sgvp-backend-api.herokuapp.com/api/sessao', $dados_formulario);
             // dd($dados_formulario);
             if ($response->successful()) {
                 // Redirecione para a lista de sessão com uma mensagem de sucesso
@@ -805,7 +805,7 @@ class SessaoController extends Controller
 
         if ($token) {
             try {
-                $response = ApiSgvp::withToken($token)->put("http://154.56.43.108:8080/api/sessao/{$nrSequence}/atualiza-status", [
+                $response = ApiSgvp::withToken($token)->put("https://sgvp-backend-api.herokuapp.com/api/sessao/{$nrSequence}/atualiza-status", [
                     'statusSessao' => $newStatus
                 ]);
 

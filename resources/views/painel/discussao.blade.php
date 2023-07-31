@@ -53,12 +53,12 @@
             <div class="col">
                 <div class="d-flex justify-content-center text-uppercase">
                     <div class="">
-                        <h1 class="text-uppercase" style="color: white;">DISCUSSÃO NOME PROJETOs </h1>
+                        <h1 class="text-uppercase" style="color: white;">DISCUSSÃO NOME PROJETO </h1>
                     </div>
 
                 </div>
                 <div class="d-flex justify-content-center text-uppercase mt-3 mb-4">
-                    <img id="imagem" src="#" alt="Foto">
+                   
 
                     <div class="px-3">
                         <div id="timer" style="color:#28a745; font-size: 109px; ">
@@ -75,17 +75,13 @@
 
                 <div class="d-flex justify-content-center text-uppercase mt-3 mb-4">
 
-                    <div class="card-vereador-a-parte  ">
-
+                    <div class="">
                     </div>
                     <div class="px-3">
                         <div id="timer" style="color:#28a745; font-size: 109px; ">
                         </div>
                         <h1 class="text-uppercase" style="color: white;" id="NomeVereadorAparte"></h1>
                         <h1 class="text-uppercase" style="color: white;" id="PartidoVereadorAparte"></h1>
-
-
-
                     </div>
 
                 </div>
@@ -101,25 +97,6 @@
                     <div class=" col-10 ">
                     </div>
                     <div class=" col-lg-12 col-sm-12 mr-3 mt-5 ">
-                        <!-- 
-                        <div class="text-center">
-                            <button class="btn btn-success btn-block mb-4 mr-2  d-flex justify-content-between"
-                                style="text-align: center;">
-                                <span>PRESENTES</span>
-                                <span></span></button>
-                            <button type="button"
-                                class="btn btn-danger btn-block mb-4 mr-2 d-flex justify-content-between"
-                                data-toggle="modal" data-target="#fadeleftModalTribuna">
-                                <span>AUSENTES</span>
-
-                            </button>
-                            <button type="button"
-                                class="btn btn-primary btn-block mb-4 mr-2 d-flex justify-content-between"
-                                data-toggle="modal" data-target="#fadeleftModal"><span>TOTAL</span><span></span></span>
-                            </button>
-                        </div> -->
-
-
                     </div>
                 </div>
             </div>

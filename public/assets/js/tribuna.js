@@ -1,41 +1,10 @@
 const { isNull } = require("lodash");
 
-let tempo = 120;
-let tempoAtual = 0;
-let intervalo;
-let vereadorAtual = null;
-let vereadorAParte = null;
-
-function formatarTempo(segundos) {
-    let minutos = Math.floor(segundos / 60);
-    segundos = segundos % 60;
-    return `${minutos.toString().padStart(2, "0")}:${segundos
-        .toString()
-        .padStart(2, "0")}`;
-}
-
-function atualizarCronometro() {
-    const tempoElement = document.getElementById("tempo");
-    tempoElement.innerText = formatarTempo(tempoAtual);
-
-    if (tempoAtual <= 10) {
-        tempoElement.style.color = "red";
-    } else {
-        tempoElement.style.color = "green";
-    }
-}
-
-function iniciarContagem() {
-    clearInterval(intervalo);
-    intervalo = setInterval(() => {
-        if (tempoAtual > 0) {
-            tempoAtual--;
-            atualizarCronometro();
-        } else {
-            pararVereadorIniciar(vereadorAtual);
-        }
-    }, 1000);
-}
+var tempo = 120;
+var tempoAtual = 2;
+var intervalo;
+var vereadorAtual = null;
+var vereadorAParte = null;
 
 function atualizarCorCard(nrSequence, acao) {
     const cardElement = document.querySelector(`#card-${nrSequence}`);
@@ -51,14 +20,38 @@ function atualizarCorCard(nrSequence, acao) {
     }
 }
 
-function iniciarVereador(nrSequence, token, nrSeqSessao, nome) {
+var nrSeqTribuna = 1;
+var minutoAdicional = 0;
+
+function setIDVereadorMomento(nrSequence) {
+    nrSeqTribuna = nrSequence;
+}
+
+function setMinutosAdicionais(minutosAdicionais) {
+    minutoAdicional = minutosAdicionais;
+    alert(minutoAdicional);
+}
+
+var nrSequence;
+var token;
+var nrSeqSessao;
+
+function setVereador(idvereador, tokenVereador, nrSessao) {
+    nrSequence = idvereador;
+    token = tokenVereador;
+    nrSeqSessao = nrSessao;
+}
+
+function adicionarTempo() {
+    const minutosAdicionais = document.getElementById("tempoAdicional").value;
+
     const data = {
         tribuna: "Momento",
-        tempoTribuna: 2,
+        tempoAdicional: minutosAdicionais, //Vai ir como nulo
+        tempoTribuna: null,
         nrSeqUsuarioTribuna: {
             nrSequence: nrSequence,
         },
-
         nrSeqSessao: {
             nrSequence: nrSeqSessao,
         },
@@ -66,7 +59,55 @@ function iniciarVereador(nrSequence, token, nrSeqSessao, nome) {
 
     console.log(data);
 
-    const url = "http://154.56.43.108:8080/api/tempoTribuna";
+    const url = "https://sgvp-backend-api.herokuapp.com/api/tempoTribuna";
+
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Adiciona o token no cabeçalho de autorização
+            // Outros cabeçalhos podem ser adicionados aqui, se necessário
+        },
+        body: JSON.stringify(data),
+    };
+    fetch(url, options)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Erro ao realizar a requisição.");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            console.log("Resposta:", data);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+}
+
+function iniciarVereador(nrSequence, token, nrSeqSessao, nome) {
+    setIDVereadorMomento(nrSequence);
+
+    if (tempoAtual === undefined) {
+        tempoAtual = 2;
+    }
+
+    const data = {
+        tribuna: "Momento",
+        tempoAdicional: minutoAdicional, //Vai ir como nulo
+        tempoTribuna: tempoAtual,
+        nrSeqUsuarioTribuna: {
+            nrSequence: nrSequence,
+        },
+        nrSeqSessao: {
+            nrSequence: nrSeqSessao,
+        },
+    };
+
+    console.log(tempoAtual);
+    setVereador(nrSequence, token, nrSeqSessao);
+
+    const url = "https://sgvp-backend-api.herokuapp.com/api/tempoTribuna";
 
     const options = {
         method: "POST",
@@ -107,10 +148,9 @@ function iniciarVereador(nrSequence, token, nrSeqSessao, nome) {
     document.querySelectorAll(".parar-a-parte").forEach((el) => {
         el.classList.add("d-none");
     });
-    // tempoAtual = tempo;
-    // console.log(tempo);
-    // iniciarContagem();
-    // atualizarCorCard(nrSequence, "iniciar");
+    tempoAtual = tempo;
+
+    atualizarCorCard(nrSequence, "iniciar");
 }
 
 function resetAParteCard() {
@@ -133,6 +173,50 @@ function resetAParteCard() {
 }
 
 function pararVereadorIniciar(nrSequence) {
+    //Lógica para adicionar o vereador que está falando a parte
+
+    // const data = {
+    //     tribuna: "A Parte",
+    //     tempoTribuna: 0,
+    //     nrSeqUsuarioTribuna: {
+    //         nrSequence: null,
+    //     },
+
+    //     nrSeqUsuarioAparte: {
+    //         nrSequence: null,
+    //     },
+    //     nrSeqSessao: {
+    //         nrSequence: nrSeqSessao,
+    //     },
+    // };
+
+    // console.log(data);
+
+    // const url = "https://sgvp-backend-api.herokuapp.com/api/tempoTribuna";
+
+    // const options = {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization: `Bearer ${token}`, // Adiciona o token no cabeçalho de autorização
+    //         // Outros cabeçalhos podem ser adicionados aqui, se necessário
+    //     },
+    //     body: JSON.stringify(data),
+    // };
+
+    // fetch(url, options)
+    //     .then((response) => {
+    //         if (!response.ok) {
+    //             throw new Error("Erro ao realizar a requisição.");
+    //         }
+    //         return response.json();
+    //     })
+    //     .then((data) => {
+    //         console.log("Resposta A parte:", data);
+    //     })
+    //     .catch((error) => {
+    //         console.error(error);
+    //     });
     // clearInterval(intervalo);
     document.getElementById("nomeVereador").innerText = "";
     // document.getElementById("tempo").innerText = "00:00";
@@ -165,12 +249,15 @@ function pararVereadorIniciar(nrSequence) {
 }
 
 function aparteVereador(nrSequence, nome, token, nrSeqSessao) {
-    console.log(nrSeqSessao);
     //Lógica para adicionar o vereador que está falando a parte
 
     const data = {
         tribuna: "A Parte",
         tempoTribuna: 2,
+        nrSeqUsuarioTribuna: {
+            nrSequence: nrSeqTribuna,
+        },
+
         nrSeqUsuarioAparte: {
             nrSequence: nrSequence,
         },
@@ -181,7 +268,7 @@ function aparteVereador(nrSequence, nome, token, nrSeqSessao) {
 
     console.log(data);
 
-    const url = "http://154.56.43.108:8080/api/tempoTribuna";
+    const url = "https://sgvp-backend-api.herokuapp.com/api/tempoTribuna";
 
     const options = {
         method: "POST",
@@ -222,35 +309,23 @@ function aparteVereador(nrSequence, nome, token, nrSeqSessao) {
     atualizarCorCard(nrSequence, "a-parte");
 }
 
-function pararVereadorAParte(nrSequence) {
-    document.getElementById("nomeVereadorAParte").innerText = "";
-    document.getElementById(`a-parte-${nrSequence}`).classList.remove("d-none");
-    document
-        .getElementById(`parar-a-parte-${nrSequence}`)
-        .classList.add("d-none");
-    atualizarCorCard(nrSequence, "parar");
-}
+// function pararVereadorAParte(nrSequence) {
+//     document.getElementById("nomeVereadorAParte").innerText = "";
+//     document.getElementById(`a-parte-${nrSequence}`).classList.remove("d-none");
+//     document
+//         .getElementById(`parar-a-parte-${nrSequence}`)
+//         .classList.add("d-none");
+//     atualizarCorCard(nrSequence, "parar");
+// }
 
 function adicionarTempoPersonalizado(minutosAdicionais) {
+    console.log(minutosAdicionais);
     if (minutosAdicionais > 0) {
         const segundosAdicionais = minutosAdicionais * 60;
         tempo += segundosAdicionais;
         tempoAtual += segundosAdicionais;
-        atualizarCronometro();
+        console.log(minutosAdicionais);
     }
-}
-
-function adicionarTempo() {
-    const minutosAdicionais = parseInt(
-        document.getElementById("tempoAdicional").value,
-        10
-    );
-    if (!isNaN(minutosAdicionais) && minutosAdicionais > 0) {
-        adicionarTempoPersonalizado(minutosAdicionais);
-        document.getElementById("tempoAdicional").value = "";
-    }
-
-    console.log(minutosAdicionais);
 }
 
 function handleKeyDown(event) {
@@ -265,7 +340,6 @@ function resetarTempo() {
     atualizarCronometro();
     if (vereadorAtual !== null) {
         clearInterval(intervalo);
-        iniciarContagem();
     }
 }
 

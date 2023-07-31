@@ -632,7 +632,7 @@
 
                         // Faz a requisição AJAX para atualizar o status do documento
                         $.ajax({
-                            url: 'http://154.56.43.108:8080/api/documento/' +
+                            url: 'https://sgvp-backend-api.herokuapp.com/api/documento/' +
                                 nrSequenceDocumento + '/atualiza-status',
                             type: 'PUT',
                             headers: {
@@ -704,7 +704,7 @@
 
                 //         // Make the AJAX request to update the status of the documents
                 //         $.ajax({
-                //             url: 'http://154.56.43.108:8080/api/documento/atualiza-status-documentos',
+                //             url: 'https://sgvp-backend-api.herokuapp.com/api/documento/atualiza-status-documentos',
                 //             type: 'PUT',
                 //             headers: {
                 //                 'Authorization': 'Bearer ' + bearerToken,
@@ -757,7 +757,7 @@
 
                         // Make the AJAX request to update the status of the documents
                         $.ajax({
-                            url: 'http://154.56.43.108:8080/api/documento/atualiza-status-documentos',
+                            url: 'https://sgvp-backend-api.herokuapp.com/api/documento/atualiza-status-documentos',
                             type: 'PUT',
                             headers: {
                                 'Authorization': 'Bearer ' + bearerToken,
@@ -956,7 +956,7 @@
 
                         // Faz a requisição AJAX para atualizar o status do documento
                         $.ajax({
-                            url: 'http://154.56.43.108:8080/api/documento/' +
+                            url: 'https://sgvp-backend-api.herokuapp.com/api/documento/' +
                                 nrSequenceDocumento + '/atualiza-status',
                             type: 'PUT',
                             headers: {

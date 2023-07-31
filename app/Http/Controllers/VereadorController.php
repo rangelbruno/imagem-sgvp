@@ -118,7 +118,7 @@ class VereadorController extends Controller
         $token = session('token');
 
         // Faz a requisição para a API para obter os documentos
-        $response = ApiSgvp::withToken($token)->get('http://154.56.43.108:8080/api/documento');
+        $response = ApiSgvp::withToken($token)->get('https://sgvp-backend-api.herokuapp.com/api/documento');
 
         // Verifica se a requisição foi bem sucedida
         if ($response->successful()) {
@@ -170,7 +170,7 @@ class VereadorController extends Controller
         ];
 
         try {
-            $response = ApiSgvp::withToken($token)->post('http://154.56.43.108:8080/api/tempoTribuna', $dados);
+            $response = ApiSgvp::withToken($token)->post('https://sgvp-backend-api.herokuapp.com/api/tempoTribuna', $dados);
 
             if ($response->successful()) {
                 return response()->json(['message' => 'Inscrição realizada com sucesso!'], 200);

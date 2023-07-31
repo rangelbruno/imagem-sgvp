@@ -130,10 +130,10 @@
                 </div>
             </div>
             <hr>
-            <div id="cronometro" class="d-flex justify-content-center mb-3">
+            <!-- <div id="cronometro" class="d-flex justify-content-center mb-3">
                 <h4 class="cronometro-label mr-3">Cronômetro:</h4>
                 <h4 id="tempo" class="cronometro-tempo">00:00</h4>
-            </div>
+            </div> -->
             <hr>
             <div class="container">
                 <div class="row">
@@ -167,7 +167,7 @@
                                     <input id="tempoAdicional" type="number" class="form-control"
                                         placeholder="Adicionar tempo em minutos">
                                     <div class="input-group-append">
-                                        <button id="adicionarTempo" class="btn btn-success">
+                                        <button id="adicionarTempo"  class="btn btn-success" onclick="adicionarTempo()">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                                 stroke-linecap="round" stroke-linejoin="round"

@@ -12,7 +12,7 @@ class ApiSgvpProvider extends ServiceProvider
         $this->app->bind('api-sgvp', function(){
             return Http::withOptions([
                 'verify' => false,
-                'base_uri' => 'http://154.56.43.108:8080/api/'
+                'base_uri' => 'https://sgvp-backend-api.herokuapp.com/api/'
             ]);
         });
         // Caso precise de autorização

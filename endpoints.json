@@ -22,6 +22,6 @@
     ]
 }
 -----------------------------------------------------
-http://154.56.43.108:8080/api/voto/relatorioResultadoVotacao?nrSeqSessao=46
-http://154.56.43.108:8080/api/voto/relatorioResultadoVotacao?nrSeqSessao=54
+https://sgvp-backend-api.herokuapp.com/api/voto/relatorioResultadoVotacao?nrSeqSessao=46
+https://sgvp-backend-api.herokuapp.com/api/voto/relatorioResultadoVotacao?nrSeqSessao=54
 -----------------------------------------------------

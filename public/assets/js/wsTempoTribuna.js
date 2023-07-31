@@ -1,11 +1,10 @@
 //Funcõa para trazer os dados dos vereadores que estão com o momento de fala
 function dadosVereadorMomentodeFala(nome, partido) {
-    if (nome === null) {
-        alert("nulo");
+    if (nome && partido === "null") {
         var nomeVereador = document.querySelector("#NameVereador");
-        nomeVereador.innerHTML = "";
-
         var partidoVereador = document.querySelector("#partidoVereadorMomento");
+
+        nomeVereador.innerHTML = "";
         partidoVereador.innerHTML = "";
     } else {
         var nomeVereador = document.querySelector("#NameVereador");
@@ -14,30 +13,26 @@ function dadosVereadorMomentodeFala(nome, partido) {
         nomeVereador.innerHTML = nome;
         partidoVereador.innerHTML = partido;
     }
-
-    return;
 }
 
 function dadosVereadorAparte(nome, partido) {
-    if (nome === null) {
-        alert("Nulo");
+    if (nome && partido === "null") {
         var nomeVereadorAparte = document.querySelector("#NomeVereadorAparte");
-        nomeVereadorAparte.innerHTML = nome;
-
         var partidoVereadorAparte = document.querySelector(
             "#PartidoVereadorAparte"
         );
-        partidoVereadorAparte.innerHTML = partido;
+
+        nomeVereadorAparte.innerHTML = "";
+        partidoVereadorAparte.innerHTML = "";
     } else {
         var nomeVereadorAparte = document.querySelector("#NomeVereadorAparte");
-        nomeVereadorAparte.innerHTML = "";
-
         var partidoVereadorAparte = document.querySelector(
             "#PartidoVereadorAparte"
         );
-        partidoVereadorAparte.innerHTML = "";
+
+        nomeVereadorAparte.innerHTML = nome;
+        partidoVereadorAparte.innerHTML = partido;
     }
-    return;
 }
 
 // function dadosVereadorAparte(nome, partido) {}
@@ -50,9 +45,24 @@ function formatTime(minutes, seconds) {
     )}`;
 }
 
+let interval;
+let totalSegundos = 0;
+let segundosAdicionais = 0;
+function setTotalSegundos(totalSeconds) {
+    totalSegundos = totalSeconds;
+}
+
 // Função para atualizar o cronômetro
-function updateTimer(minutes) {
-    let totalSeconds = minutes * 60;
+function updateTimer(minutes, minutoAdicional) {
+    let totalSeconds = 0;
+
+    if (minutoAdicional === "null") {
+        totalSeconds = minutes * 60;
+    }
+
+    if (minutes === "null") {
+        totalSeconds = minutoAdicional * 60 + totalSegundos;
+    }
 
     const timerElement = document.getElementById("timer");
 
@@ -63,51 +73,127 @@ function updateTimer(minutes) {
 
         if (totalSeconds <= 0) {
             clearInterval(interval);
+
             // Aqui você pode adicionar alguma ação quando o cronômetro chegar a zero.
             console.log("Cronômetro chegou a zero!");
         }
-
+        setTotalSegundos(totalSeconds);
         totalSeconds--;
     }
 
+    // Verifique se o intervalo já está ativo
+    if (interval) {
+        clearInterval(interval);
+    }
+
+    // Inicialize o intervalo
+    interval = setInterval(update, 1000);
+
     // Chame a função update imediatamente para evitar um atraso de 1 segundo no início
     update();
-
-    // Chame a função update a cada segundo
-    const interval = setInterval(update, 1000);
 }
+// if (minutes === "null") {
+//     let segundosAdicionais = minutoAdicional * 60 + totalSegundos;
+//     console.log(segundosAdicionais);
+
+//     const timerElement = document.getElementById("timer");
+//     function update() {
+//         const minutes = Math.floor(segundosAdicionais / 60);
+//         const seconds = segundosAdicionais % 60;
+//         timerElement.textContent = formatTime(minutes, seconds);
+
+//         if (segundosAdicionais <= 0) {
+//             clearInterval(interval);
+
+//             // Aqui você pode adicionar alguma ação quando o cronômetro chegar a zero.
+//             console.log("Cronômetro chegou a zero!");
+//         }
+
+//         segundosAdicionais--;
+//     }
+
+//     if (interval) {
+//         clearInterval(interval);
+//     }
+
+//     // Inicialize o intervalo
+//     interval = setInterval(update, 1000);
+
+//     // Chame a função update imediatamente para evitar um atraso de 1 segundo no início
+//     update();
+// }
+
+// let totalSeconds = minutes * 60;
+// console.log(totalSeconds);
+
+// const timerElement = document.getElementById("timer");
+
+// function update() {
+//     const minutes = Math.floor(totalSeconds / 60);
+
+//     const seconds = totalSeconds % 60;
+//     timerElement.textContent = formatTime(minutes, seconds);
+//     console.log(minutes);
+
+//     if (totalSeconds <= 0) {
+//         console.log(totalSeconds);
+//         clearInterval(interval);
+//         // Aqui você pode adicionar alguma ação quando o cronômetro chegar a zero.
+//         console.log("Cronômetro chegou a zero!");
+//     }
+
+//     totalSeconds--;
+// }
+
+// // Verifique se o intervalo já está ativo
+// if (interval) {
+//     clearInterval(interval);
+// }
+
+// // Inicialize o intervalo
+// interval = setInterval(update, 1000);
+
+// // Chame a função update imediatamente para evitar um atraso de 1 segundo no início
+// update();
 
 // Cria uma nova instânci a de WebSocket
-const socket = new WebSocket(
-    "ws://sgvp-backend-api.herokuapp.com/ws/tempoTribuna"
-);
+function reconnectWebSocket() {
+    const socket = new WebSocket(
+        "ws://sgvp-backend-api.herokuapp.com/ws/tempoTribuna"
+    );
 
-// Manipulador de evento para quando a conexão é estabelecida
-socket.onopen = function () {
-    console.log("Conexão estabelecida com sucesso!");
-};
+    // Manipulador de evento para quando a conexão é estabelecida
+    socket.onopen = function () {
+        console.log("Conexão estabelecida com sucesso!");
+    };
 
-// Manipulador de evento para receber mensagens do servidor
-socket.onmessage = function (event) {
-    const data = event.data;
-    const objeto = JSON.parse(data);
-    const nomeVereadorMomento = objeto.vereadorMomento;
-    const partidoVereadorMomento = objeto.partidoVereadorMomento;
-    const nomeVereadorAparte = objeto.vereadorAparte;
-    const partidoVereadorAparte = objeto.partidoVereadorAparte;
+    // Manipulador de evento para receber mensagens do servidor
+    socket.onmessage = function (event) {
+        const data = event.data;
+        const objeto = JSON.parse(data);
+        console.log(objeto);
+        const nomeVereadorMomento = objeto.vereadorMomento;
+        const partidoVereadorMomento = objeto.partidoVereadorMomento;
+        const partidoVereadorAparte = objeto.partidoVereadorAparte;
+        const vereadorAparte = objeto.vereadorAparte;
+        const tempoAdicional = objeto.tempoAdicional;
+        dadosVereadorMomentodeFala(nomeVereadorMomento, partidoVereadorMomento);
+        const tempoTribuna = objeto.tempoTribuna;
+        console.log(tempoAdicional);
+        dadosVereadorAparte(vereadorAparte, partidoVereadorAparte);
+        updateTimer(tempoTribuna, tempoAdicional);
+    };
 
-    dadosVereadorMomentodeFala(nomeVereadorMomento, partidoVereadorMomento);
-    dadosVereadorAparte(nomeVereadorAparte, partidoVereadorAparte);
-    const tempoTribuna = objeto.tempoTribuna;
-    updateTimer(tempoTribuna);
-};
+    // Manipulador de evento para lidar com erros
+    socket.onerror = function (error) {
+        console.error("Erro WebSocket:", error);
+    };
 
-// Manipulador de evento para lidar com erros
-socket.onerror = function (error) {
-    console.error("Erro WebSocket:", error);
-};
+    // Manipulador de evento para lidar com o fechamento da conexão
+    socket.onclose = function () {
+        console.log("Conexão fechada.");
+        setTimeout(reconnectWebSocket, 1000);
+    };
+}
 
-// Manipulador de evento para lidar com o fechamento da conexão
-socket.onclose = function () {
-    console.log("Conexão fechada.");
-};
+reconnectWebSocket();

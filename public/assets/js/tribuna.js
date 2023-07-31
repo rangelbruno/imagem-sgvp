@@ -22,11 +22,14 @@ function atualizarCorCard(nrSequence, acao) {
 
 var nrSeqTribuna = 1;
 var minutoAdicional = 0;
+var nrSeqVereadorAparte;
 
 function setIDVereadorMomento(nrSequence) {
     nrSeqTribuna = nrSequence;
 }
-
+function setIDVereadorAparte(nrSequence) {
+    nrSeqVereadorAparte = nrSequence;
+}
 function setMinutosAdicionais(minutosAdicionais) {
     minutoAdicional = minutosAdicionais;
     alert(minutoAdicional);
@@ -51,6 +54,9 @@ function adicionarTempo() {
         tempoTribuna: null,
         nrSeqUsuarioTribuna: {
             nrSequence: nrSequence,
+        },
+        nrSeqUsuarioAparte: {
+            nrSequence: nrSeqVereadorAparte,
         },
         nrSeqSessao: {
             nrSequence: nrSeqSessao,
@@ -99,6 +105,7 @@ function iniciarVereador(nrSequence, token, nrSeqSessao, nome) {
         nrSeqUsuarioTribuna: {
             nrSequence: nrSequence,
         },
+
         nrSeqSessao: {
             nrSequence: nrSeqSessao,
         },
@@ -249,6 +256,7 @@ function pararVereadorIniciar(nrSequence) {
 }
 
 function aparteVereador(nrSequence, nome, token, nrSeqSessao) {
+    setIDVereadorAparte(nrSequence);
     //Lógica para adicionar o vereador que está falando a parte
 
     const data = {
@@ -257,7 +265,6 @@ function aparteVereador(nrSequence, nome, token, nrSeqSessao) {
         nrSeqUsuarioTribuna: {
             nrSequence: nrSeqTribuna,
         },
-
         nrSeqUsuarioAparte: {
             nrSequence: nrSequence,
         },

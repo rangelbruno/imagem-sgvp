@@ -92,69 +92,6 @@ function updateTimer(minutes, minutoAdicional) {
     // Chame a função update imediatamente para evitar um atraso de 1 segundo no início
     update();
 }
-// if (minutes === "null") {
-//     let segundosAdicionais = minutoAdicional * 60 + totalSegundos;
-//     console.log(segundosAdicionais);
-
-//     const timerElement = document.getElementById("timer");
-//     function update() {
-//         const minutes = Math.floor(segundosAdicionais / 60);
-//         const seconds = segundosAdicionais % 60;
-//         timerElement.textContent = formatTime(minutes, seconds);
-
-//         if (segundosAdicionais <= 0) {
-//             clearInterval(interval);
-
-//             // Aqui você pode adicionar alguma ação quando o cronômetro chegar a zero.
-//             console.log("Cronômetro chegou a zero!");
-//         }
-
-//         segundosAdicionais--;
-//     }
-
-//     if (interval) {
-//         clearInterval(interval);
-//     }
-
-//     // Inicialize o intervalo
-//     interval = setInterval(update, 1000);
-
-//     // Chame a função update imediatamente para evitar um atraso de 1 segundo no início
-//     update();
-// }
-
-// let totalSeconds = minutes * 60;
-// console.log(totalSeconds);
-
-// const timerElement = document.getElementById("timer");
-
-// function update() {
-//     const minutes = Math.floor(totalSeconds / 60);
-
-//     const seconds = totalSeconds % 60;
-//     timerElement.textContent = formatTime(minutes, seconds);
-//     console.log(minutes);
-
-//     if (totalSeconds <= 0) {
-//         console.log(totalSeconds);
-//         clearInterval(interval);
-//         // Aqui você pode adicionar alguma ação quando o cronômetro chegar a zero.
-//         console.log("Cronômetro chegou a zero!");
-//     }
-
-//     totalSeconds--;
-// }
-
-// // Verifique se o intervalo já está ativo
-// if (interval) {
-//     clearInterval(interval);
-// }
-
-// // Inicialize o intervalo
-// interval = setInterval(update, 1000);
-
-// // Chame a função update imediatamente para evitar um atraso de 1 segundo no início
-// update();
 
 // Cria uma nova instânci a de WebSocket
 function reconnectWebSocket() {
@@ -179,7 +116,6 @@ function reconnectWebSocket() {
         const tempoAdicional = objeto.tempoAdicional;
         dadosVereadorMomentodeFala(nomeVereadorMomento, partidoVereadorMomento);
         const tempoTribuna = objeto.tempoTribuna;
-        console.log(tempoAdicional);
         dadosVereadorAparte(vereadorAparte, partidoVereadorAparte);
         updateTimer(tempoTribuna, tempoAdicional);
     };

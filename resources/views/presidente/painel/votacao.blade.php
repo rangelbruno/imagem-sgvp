@@ -216,7 +216,8 @@
         </div>
 
         <script>
-            // Cria uma nova instância de WebSocket
+            function reconnectWebSocket(){
+// Cria uma nova instância de WebSocket
             const socket = new WebSocket('ws://sgvp-backend-api.herokuapp.com/ws/usuarioVotou');
 
             // Manipulador de evento para quando a conexão é estabelecida
@@ -244,7 +245,7 @@
 
             // Atualizar a página aq  localStorage.clear();
             location.reload();
-            };
+        
 
             // Manipulador de evento para lidar com erros
             socket.onerror = function(error) {
@@ -254,9 +255,14 @@
             // Manipulador de evento para lidar com o fechamento da conexão
             socket.onclose = function() {
                 console.log('Conexão fechada.');
+                setTimeout(reconnectWebSocket, 1000);
+
 
 
             };
+            }
+            reconnectWebSocket()
+            
         </script>
         <script>
             function updateTime() {

@@ -21,14 +21,16 @@ function atualizarCorCard(nrSequence, acao) {
 }
 
 var nrSeqTribuna = 1;
-var minutoAdicional = 0;
-var nrSeqVereadorAparte;
+var minutoAdicional = null;
+var nrSeqVereadorAparte = null;
+console.log(minutoAdicional);
 
 function setIDVereadorMomento(nrSequence) {
     nrSeqTribuna = nrSequence;
 }
 function setIDVereadorAparte(nrSequence) {
     nrSeqVereadorAparte = nrSequence;
+    console.log(nrSeqVereadorAparte);
 }
 function setMinutosAdicionais(minutosAdicionais) {
     minutoAdicional = minutosAdicionais;
@@ -47,22 +49,25 @@ function setVereador(idvereador, tokenVereador, nrSessao) {
 
 function adicionarTempo() {
     const minutosAdicionais = document.getElementById("tempoAdicional").value;
-
+    console.log(nrSeqVereadorAparte);
     const data = {
         tribuna: "Momento",
-        tempoAdicional: minutosAdicionais, //Vai ir como nulo
+        tempoAdicional: minutosAdicionais,
         tempoTribuna: null,
         nrSeqUsuarioTribuna: {
             nrSequence: nrSequence,
-        },
-        nrSeqUsuarioAparte: {
-            nrSequence: nrSeqVereadorAparte,
         },
         nrSeqSessao: {
             nrSequence: nrSeqSessao,
         },
     };
 
+    if (nrSeqVereadorAparte !== null) {
+        data.nrSeqUsuarioAparte = {
+            nrSequence: nrSeqVereadorAparte,
+        };
+    }
+    console.log(nrSeqVereadorAparte);
     console.log(data);
 
     const url = "https://sgvp-backend-api.herokuapp.com/api/tempoTribuna";
@@ -93,6 +98,7 @@ function adicionarTempo() {
 
 function iniciarVereador(nrSequence, token, nrSeqSessao, nome) {
     setIDVereadorMomento(nrSequence);
+    setIDVereadorAparte(null);
 
     if (tempoAtual === undefined) {
         tempoAtual = 2;
@@ -105,11 +111,11 @@ function iniciarVereador(nrSequence, token, nrSeqSessao, nome) {
         nrSeqUsuarioTribuna: {
             nrSequence: nrSequence,
         },
-
         nrSeqSessao: {
             nrSequence: nrSeqSessao,
         },
     };
+    console.log(data);
 
     console.log(tempoAtual);
     setVereador(nrSequence, token, nrSeqSessao);
@@ -179,52 +185,45 @@ function resetAParteCard() {
     }
 }
 
-function pararVereadorIniciar(nrSequence) {
+function pararVereadorIniciar(nrSequence, token, nrSeqSessao) {
     //Lógica para adicionar o vereador que está falando a parte
 
-    // const data = {
-    //     tribuna: "A Parte",
-    //     tempoTribuna: 0,
-    //     nrSeqUsuarioTribuna: {
-    //         nrSequence: null,
-    //     },
+    const data = {
+        tribuna: "Limpar",
+        nrSeqSessao: {
+            nrSequence: nrSeqSessao,
+        },
+    };
 
-    //     nrSeqUsuarioAparte: {
-    //         nrSequence: null,
-    //     },
-    //     nrSeqSessao: {
-    //         nrSequence: nrSeqSessao,
-    //     },
-    // };
+    console.log(data);
 
     // console.log(data);
 
-    // const url = "https://sgvp-backend-api.herokuapp.com/api/tempoTribuna";
+    const url = "https://sgvp-backend-api.herokuapp.com/api/tempoTribuna";
 
-    // const options = {
-    //     method: "POST",
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //         Authorization: `Bearer ${token}`, // Adiciona o token no cabeçalho de autorização
-    //         // Outros cabeçalhos podem ser adicionados aqui, se necessário
-    //     },
-    //     body: JSON.stringify(data),
-    // };
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Adiciona o token no cabeçalho de autorização
+            // Outros cabeçalhos podem ser adicionados aqui, se necessário
+        },
+        body: JSON.stringify(data),
+    };
 
-    // fetch(url, options)
-    //     .then((response) => {
-    //         if (!response.ok) {
-    //             throw new Error("Erro ao realizar a requisição.");
-    //         }
-    //         return response.json();
-    //     })
-    //     .then((data) => {
-    //         console.log("Resposta A parte:", data);
-    //     })
-    //     .catch((error) => {
-    //         console.error(error);
-    //     });
-    // clearInterval(intervalo);
+    fetch(url, options)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Erro ao realizar a requisição.");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            console.log("Resposta A parte:", data);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     document.getElementById("nomeVereador").innerText = "";
     // document.getElementById("tempo").innerText = "00:00";
     // tempoAtual = tempo;
@@ -316,14 +315,14 @@ function aparteVereador(nrSequence, nome, token, nrSeqSessao) {
     atualizarCorCard(nrSequence, "a-parte");
 }
 
-// function pararVereadorAParte(nrSequence) {
-//     document.getElementById("nomeVereadorAParte").innerText = "";
-//     document.getElementById(`a-parte-${nrSequence}`).classList.remove("d-none");
-//     document
-//         .getElementById(`parar-a-parte-${nrSequence}`)
-//         .classList.add("d-none");
-//     atualizarCorCard(nrSequence, "parar");
-// }
+function pararVereadorAParte(nrSequence) {
+    document.getElementById("nomeVereadorAParte").innerText = "";
+    document.getElementById(`a-parte-${nrSequence}`).classList.remove("d-none");
+    document
+        .getElementById(`parar-a-parte-${nrSequence}`)
+        .classList.add("d-none");
+    atualizarCorCard(nrSequence, "parar");
+}
 
 function adicionarTempoPersonalizado(minutosAdicionais) {
     console.log(minutosAdicionais);

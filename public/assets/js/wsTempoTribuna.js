@@ -15,6 +15,13 @@ function dadosVereadorMomentodeFala(nome, partido) {
     }
 }
 
+function limparTelão(tribuna) {
+    console.log(tribuna);
+    if (tribuna === "Limpar") {
+        const timer = document.getElementById("timer");
+    }
+}
+
 function dadosVereadorAparte(nome, partido) {
     if (nome && partido === "null") {
         var nomeVereadorAparte = document.querySelector("#NomeVereadorAparte");
@@ -53,7 +60,7 @@ function setTotalSegundos(totalSeconds) {
 }
 
 // Função para atualizar o cronômetro
-function updateTimer(minutes, minutoAdicional) {
+function updateTimer(minutes, minutoAdicional, tribuna) {
     let totalSeconds = 0;
 
     if (minutoAdicional === "null") {
@@ -66,7 +73,11 @@ function updateTimer(minutes, minutoAdicional) {
 
     const timerElement = document.getElementById("timer");
 
-    function update() {
+    function update(tribuna) {
+        if (tribuna === "Limpar") {
+            const timerElement = document.getElementById("timer");
+            timerElement.innerHTML = "";
+        }
         const minutes = Math.floor(totalSeconds / 60);
         const seconds = totalSeconds % 60;
         timerElement.textContent = formatTime(minutes, seconds);
@@ -90,7 +101,7 @@ function updateTimer(minutes, minutoAdicional) {
     interval = setInterval(update, 1000);
 
     // Chame a função update imediatamente para evitar um atraso de 1 segundo no início
-    update();
+    update(tribuna);
 }
 
 // Cria uma nova instânci a de WebSocket
@@ -116,8 +127,9 @@ function reconnectWebSocket() {
         const tempoAdicional = objeto.tempoAdicional;
         dadosVereadorMomentodeFala(nomeVereadorMomento, partidoVereadorMomento);
         const tempoTribuna = objeto.tempoTribuna;
+        const tribuna = objeto.tribuna;
         dadosVereadorAparte(vereadorAparte, partidoVereadorAparte);
-        updateTimer(tempoTribuna, tempoAdicional);
+        updateTimer(tempoTribuna, tempoAdicional, tribuna);
     };
 
     // Manipulador de evento para lidar com erros

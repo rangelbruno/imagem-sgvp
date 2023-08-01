@@ -230,7 +230,7 @@
                                         class="btn btn-outline-success mb-2 iniciar">Início</button>
 
                                     <button id="parar-{{ $usuario['nrSequence'] }}"
-                                        onclick="pararVereadorIniciar({{ $usuario['nrSequence'] }})"
+                                        onclick="pararVereadorIniciar({{ $usuario['nrSequence'] }}, '{{ $usuario['token'] }}', '{{ $sessao['nrSequence']}}')"
                                         data-nrSequence="{{ $usuario['nrSequence'] }}"
                                         class="btn btn-outline-danger mb-2 parar d-none">Parar</button>
                                     <button id="parar-a-parte-{{ $usuario['nrSequence'] }}"
